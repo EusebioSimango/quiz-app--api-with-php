@@ -3,6 +3,9 @@
 require 'config.php';
 
 header('Access-Control-Allow-Origin: *');
+header('Access-Control-Request-Method: *');
+header('Access-Control-Allow-Methods: OPTIONS, GET');
+header('Access-Control-Allow-Headers: *');
 header('Content-Type: application/json');
 
 $httpMethod = $_SERVER['REQUEST_METHOD'];
