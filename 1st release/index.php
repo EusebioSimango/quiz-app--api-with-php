@@ -40,20 +40,22 @@ switch ($httpMethod) {
   case 'POST':
     # code...
     
-    $dataJson = json_encode(file_get_contents('php://input'));
-    $sql = 'INSERT INTO `questions`(`question`, `a`, `b`, `c`, `d`, `rightAnswer`)
+    $dataJson = file_get_contents('php://input');
+    $f = json_encode($dataJson);
+    $data = json_decode([$dataJson][0]);
+    $sql = "INSERT INTO `questions`(`question`, `a`, `b`, `c`, `d`, `rightAnswer`)
       VALUES (
-        "Qual dos nomes abaixo é de um dos criadores do Facebook Inc. agora META",
-        "Ellon Musk",
-        "Mark Zuckerberg",
-        "Bill Gates",
-        "Jeff Bazzos",
-        "b"
-    )';
+        '$data->question',
+        '$data->a',
+        '$data->b',
+        '$data->c',
+        '$data->d',
+        '$data->rightAnswer'
+    )";
   
     mysqli_query($connection, $sql);
-    $f = json_decode($dataJson);
-    echo $f;
+    
+
     die();
     break;
   
