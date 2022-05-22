@@ -15,36 +15,22 @@ switch ($httpMethod) {
     $sql = 'SELECT * FROM `questions` WHERE 1';
     $result = mysqli_query($connection, $sql);
     $rows = mysqli_num_rows($result);
-    //Initializing arrays
-    $question = array();
-    $a = array();
-    $b = array();
-    $c = array();
-    $d = array();
-    $rightAnswer = array();
     echo "[";
     while ($req=mysqli_fetch_assoc($result)) {
-      $question[$i] = $req['question'];
-      $a[$i] = $req['a'];
-      $b[$i] = $req['b'];
-      $c[$i] = $req['c'];
-      $d[$i] = $req['d'];
-      $rightAnswer[$i] = $req['rightAnswer'];
-
       $json = array();
       $questions = array();
-      $questions[$i]['question'] = $question[$i];
-      $questions[$i]['optionA'] = $a[$i];
-      $questions[$i]['optionB'] = $b[$i];
-      $questions[$i]['optionC'] = $c[$i];
-      $questions[$i]['optionD'] = $d[$i];
-      $questions[$i]['rightAnswer'] = $rightAnswer[$i];
+      $questions[$i]['question'] = $req['question'];
+      $questions[$i]['optionA'] = $req['a'];
+      $questions[$i]['optionB'] = $req['b'];
+      $questions[$i]['optionC'] = $req['c'];
+      $questions[$i]['optionD'] = $req['d'];
+      $questions[$i]['rightAnswer'] = $req['rightAnswer'];
       $json[$i] = $questions[$i];
-      $j = json_encode($json);
-      $jj = json_decode($j, false);
+      $jsonEncoded = json_encode($json);
+      $jsonDecoded = json_decode($jsonEncoded, false);
 
-      if ($i > 0) echo ",".json_encode($jj->$i);
-      if ($i == 0) echo(json_encode($jj->$i));
+      if ($i > 0) echo ",".json_encode($jsonDecoded->$i);
+      if ($i == 0) echo(json_encode($jsonDecoded->$i));
 
       $i++;
     }
