@@ -30,7 +30,6 @@ switch ($httpMethod) {
 
       if ($i > 0) echo ",".json_encode($jsonDecoded->$i);
       if ($i == 0) echo(json_encode($jsonDecoded->$i));
-
       $i++;
     }
     echo "]";
