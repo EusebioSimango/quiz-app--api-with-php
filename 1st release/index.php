@@ -9,7 +9,6 @@ $httpMethod = $_SERVER['REQUEST_METHOD'];
 $contentType = explode(":",$_SERVER['CONTENT_TYPE'])[0];
 
 
-
 switch ($httpMethod) {
   case 'GET':
     # code...
@@ -23,6 +22,7 @@ switch ($httpMethod) {
     $c = array();
     $d = array();
     $rightAnswer = array();
+    echo "[";
     while ($req=mysqli_fetch_assoc($result)) {
       $question[$i] = $req['question'];
       $a[$i] = $req['a'];
@@ -31,12 +31,24 @@ switch ($httpMethod) {
       $d[$i] = $req['d'];
       $rightAnswer[$i] = $req['rightAnswer'];
 
-      // echo $question[$i].$a[$i];
-      $json = json_decode(["question" => '$question']);
-      echo $json;
+      $json = array();
+      $questions = array();
+      $questions[$i]['question'] = $question[$i];
+      $questions[$i]['optionA'] = $a[$i];
+      $questions[$i]['optionB'] = $b[$i];
+      $questions[$i]['optionC'] = $c[$i];
+      $questions[$i]['optionD'] = $d[$i];
+      $questions[$i]['rightAnswer'] = $rightAnswer[$i];
+      $json[$i] = $questions[$i];
+      $j = json_encode($json);
+      $jj = json_decode($j, false);
+
+      if ($i > 0) echo ",".json_encode($jj->$i);
+      if ($i == 0) echo(json_encode($jj->$i));
+
       $i++;
     }
-
+    echo "]";
 
     break;
   case 'POST':
