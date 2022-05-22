@@ -11,7 +11,6 @@ $contentType = explode(":",$_SERVER['CONTENT_TYPE'])[0];
 
 switch ($httpMethod) {
   case 'GET':
-    # code...
     $sql = 'SELECT * FROM `questions` WHERE 1';
     $result = mysqli_query($connection, $sql);
     $rows = mysqli_num_rows($result);
@@ -38,7 +37,6 @@ switch ($httpMethod) {
 
     break;
   case 'POST':
-    # code...
     
     $dataJson = file_get_contents('php://input');
     $f = json_encode($dataJson);
@@ -54,28 +52,11 @@ switch ($httpMethod) {
     )";
   
     mysqli_query($connection, $sql);
-    
-
     die();
     break;
   
   default:
-    # code...
     echo "cannot ".$httpMethod;
-    
     break;
 }
-
-
-// $sql = 'INSERT INTO `feedbacks`(`id`, `type`, `comment`, `screenshot`)
-//   VALUES (
-//     md5(NOW()),
-//     "BUG",
-//     "Shii!",
-//     "test.png"
-// )';
-
-// mysqli_query($connection, $sql)
-
-
 ?>
