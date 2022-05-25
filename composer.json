@@ -1,0 +1,11 @@
+{
+    "name": "eusebio/quiz-app--api-with-php",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Eusebio Simango",
+            "email": "eusebiosimango14@gmail.com"
+        }
+    ],
+    "require": {}
+}
